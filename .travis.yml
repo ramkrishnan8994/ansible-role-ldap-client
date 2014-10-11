@@ -1,0 +1,20 @@
+---
+# base on https://github.com/geerlingguy/ansible-role-apache/blob/master/.travis.yml
+language: python
+python: "2.7"
+
+notifications:
+  email:
+    recipients:
+      - devops@gildia.info
+
+before_install:
+  # Updating apt cache repository
+  - "sudo apt-get update -qq"
+
+install:
+  - "pip install ansible"
+
+script:
+  # Run some test commands
+  - ./tests/run_tests

@@ -1,0 +1,5 @@
+---
+  ldap_client_server_host: "localhost"
+  ldap_client_base_dn:     "dc=example,dc=com"
+  ldap_client_sudo:        true
+  ldap_client_sudo_base:   "ou=SUDOers,dc=example,dc=com"

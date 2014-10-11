@@ -1,0 +1,7 @@
+---
+  ldap_client_packages:
+    - libnss-ldapd
+    - nslcd
+    - nscd
+    
+  ldap_client_path: "/etc/ldap/"

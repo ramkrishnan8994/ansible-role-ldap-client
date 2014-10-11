@@ -1,0 +1,18 @@
+---
+  - name: Update apt cache
+    apt:  update_cache=yes cache_valid_time=3600
+
+  - name: Install ldap client packages
+    apt:  name={{ item }} state=present
+    with_items:
+      - "{{ ldap_client_packages }}"
+
+# TODO: Instalation of sudo-ldap on UBUNTU
+#  - name: Install sudo-ldap package
+#    apt:  name=sudo-ldap state=present
+#    when: ldap_client_sudo
+
+  - name: Copy ldap.conf configuration file
+    template: src=ldap.conf.j2 dest={{ ldap_client_path }}/ldap.conf
+
+  - include: configure_ldap_client.yml
