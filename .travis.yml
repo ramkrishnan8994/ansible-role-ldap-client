@@ -18,3 +18,5 @@ install:
 script:
   # Run some test commands
   - ./tests/run_tests
+  - pgrep nscd || (echo "nscd daemon test failed" && exit 1)
+  - pgrep nslcd || (echo "nslcd daemon test failed" && exit 1)

@@ -5,12 +5,16 @@
 # If you have the `glibc-doc-reference' and `info' packages installed, try:
 # `info libc "Name Service Switch"' for information about this file.
 
-passwd:         compat ldap
-group:          compat ldap
-shadow:         compat ldap
+passwd:         compat {% if ldap_client_nss_passwd %} ldap {% endif %}
 
-hosts:          files dns ldap
-networks:       files ldap
+group:          compat {% if ldap_client_nss_group %} ldap {% endif %}
+
+shadow:         compat {% if ldap_client_nss_shadow %} ldap {% endif %}
+
+hosts:          files dns {% if ldap_client_nss_hosts %} ldap {% endif %}
+
+networks:       files {% if ldap_client_nss_networks %} ldap {% endif %}
+
 
 protocols:      db files
 services:       db files
@@ -18,4 +22,4 @@ ethers:         db files
 rpc:            db files
 
 netgroup:       nis
-sudoers:		files {% if ldap_client_sudo %}ldap{% endif %}
+sudoers:		files {% if ldap_client_sudo %} ldap {% endif %}

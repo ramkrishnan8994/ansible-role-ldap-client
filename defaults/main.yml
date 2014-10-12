@@ -3,6 +3,11 @@
   ldap_client_base_dn:     "dc=example,dc=com"
   ldap_client_sudo:        true
   ldap_client_sudo_base:   "ou=SUDOers,dc=example,dc=com"
+  ldap_client_nss_passwd:   true
+  ldap_client_nss_group:    true
+  ldap_client_nss_shadow:   true
+  ldap_client_nss_hosts:    true
+  ldap_client_nss_networks: true
 
   ldap_client_nslcd_filter:
     filter:
