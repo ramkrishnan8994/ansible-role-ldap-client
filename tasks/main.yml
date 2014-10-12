@@ -12,7 +12,4 @@
 #    apt:  name=sudo-ldap state=present
 #    when: ldap_client_sudo
 
-  - name: Copy ldap.conf configuration file
-    template: src=ldap.conf.j2 dest={{ ldap_client_path }}/ldap.conf
-
   - include: configure_ldap_client.yml
