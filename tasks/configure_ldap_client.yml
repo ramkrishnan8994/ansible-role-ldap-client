@@ -1,0 +1,4 @@
+  - name: Nscd daemon configuration file
+    template: src=nscd.conf.j2 dest=/etc/nscd.conf owner=root group=root mode=0644
+    notify:
+      - restart nscd
