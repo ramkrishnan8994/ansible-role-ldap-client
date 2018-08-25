@@ -2,15 +2,36 @@
   - name: Copy ldap.conf configuration file
     template: src=ldap.conf.j2 dest={{ ldap_client_path }}/ldap.conf
 
-  - name: Setup nsswitch file
-    template: src=nsswitch.conf.j2 dest=/etc/nsswitch.conf
+  - name: Setup nsswitch file with command
+    command: sudo auth-client-config -t nss -p lac_ldap
 
-  - name: Nscd daemon configuration file
-    template: src=nscd.conf.j2 dest=/etc/nscd.conf owner=root group=root mode=0644
+  - name: Create Home directory automatically
+    lineinfile:
+      path: /etc/pam.d/common-session
+      line: {{ ldap_client_create_homedir }}
+      backup: yes
+
+  - name: Remove use_authtok from common-password
+    replace:
+      path: /etc/pam.d/common-password
+      regexp: 'use_authtok'
+      replace: ''
+      backup: yes
+
+  - name: Pam Auth Update
+    command: pam-auth-update
+
+  - name: Restart nscd
     notify:
       - restart nscd
 
-  - name: Nslcd daemon configuration file
-    template: src=nslcd.conf.j2 dest=/etc/nslcd.conf owner=root group=nslcd mode=0640
-    notify:
-      - restart nslcd
+
+  # - name: Nscd daemon configuration file
+  #   template: src=nscd.conf.j2 dest=/etc/nscd.conf owner=root group=root mode=0644
+  #   notify:
+  #     - restart nscd
+  #
+  # - name: Nslcd daemon configuration file
+  #   template: src=nslcd.conf.j2 dest=/etc/nslcd.conf owner=root group=nslcd mode=0640
+  #   notify:
+  #     - restart nslcd

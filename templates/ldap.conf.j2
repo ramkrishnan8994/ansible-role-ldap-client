@@ -1,17 +1,10 @@
-# {{ ansible_managed }}
-# LDAP Defaults
-#
+base dc={{ ldap_client_base_dn }}
 
-# See ldap.conf(5) for details
-# This file should be world readable but not world writable.
-BASE	{{ ldap_client_base_dn }}
-URI	ldap://{{ ldap_client_server_host }}/
-{% if ldap_client_sudo %}
-SUDOERS_BASE {{ ldap_client_sudo_base }}
-{% endif %}
-#SIZELIMIT	12
-#TIMELIMIT	15
-#DEREF		never
+uri ldap://{{ ldap_client_server_host }}
 
-# TLS certificates (needed for GnuTLS)
-TLS_CACERT	/etc/ssl/certs/ca-certificates.crt
+ldap_version 3
+
+rootbinddn {{ ldap_client_root_dn }}
+
+pam_password exop
+pam_lookup_policy yes

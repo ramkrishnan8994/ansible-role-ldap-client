@@ -1,7 +1,8 @@
 ---
   ldap_client_packages:
-    - libnss-ldapd
-    - nslcd
+    - ldap-auth-client
     - nscd
-    
-  ldap_client_path: "/etc/ldap/"
+    - nslcd
+    - ldap-utils
+
+  ldap_client_path: "/etc/"

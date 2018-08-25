@@ -1,6 +1,8 @@
 ---
   ldap_client_server_host: "192.168.1.188:1389"
   ldap_client_base_dn:     "dc=goals101,dc=localdomain"
+  ldap_client_root_dn: "cn=admin,dc=goals101,dc=localdomain"
+  ldap_client_passwd: "ralapakr1!"
   ldap_client_sudo:        true
   ldap_client_sudo_base:   "ou=sudoers,ou=People,dc=goals101,dc=localdomain"
   ldap_client_nss_passwd:   true
@@ -12,3 +14,5 @@
   ldap_client_nslcd_filter:
     filter:
       passwd: "(memberOf=cn=testgroup,ou=servers,dc=example,dc=com)"
+
+  ldap_client_create_homedir: "session required        pam_mkhomedir.so umask=0022 skel=/etc/skel"
